@@ -32,7 +32,7 @@ import frc.robot.Constants;
  * CANcoder
  *
  * <p>NOTE: This implementation should be used as a starting point and adapted to different hardware
- * configurations (e.g. If using an analog encoder, copy from "ModuleIOSparkMax")
+ * configurations (e.g. If using an analog encoder, copy from "ModuleIOSparkMax") `
  *
  * <p>To calibrate the absolute encoder offsets, point the modules straight (such that forward
  * motion on the drive motor will propel the robot forward) and copy the reported values from the
@@ -56,9 +56,14 @@ public class ModuleIOTalonFX implements ModuleIO {
   private final StatusSignal<Double> turnCurrent;
 
   // Gear ratios for SDS MK4i L2, adjust as necessary
-  private final double DRIVE_GEAR_RATIO = (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
-  private final double TURN_GEAR_RATIO = 150.0 / 7.0;
-
+  private final double DRIVE_GEAR_RATIO = 12.8; // (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
+  private final double TURN_GEAR_RATIO = 12.8; // 150.0 / 7.0;
+  // -1186
+  // -1533
+  // 347
+  // -104
+  // -126
+  // 22
   private final boolean isTurnMotorInverted = true;
   private final Rotation2d absoluteEncoderOffset;
 
