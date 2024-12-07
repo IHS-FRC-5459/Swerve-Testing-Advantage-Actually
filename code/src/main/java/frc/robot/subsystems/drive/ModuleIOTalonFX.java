@@ -25,6 +25,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 /**
@@ -56,7 +57,7 @@ public class ModuleIOTalonFX implements ModuleIO {
   private final StatusSignal<Double> turnCurrent;
 
   // Gear ratios for SDS MK4i L2, adjust as necessary
-  private final double DRIVE_GEAR_RATIO = 12.8; // (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
+  private final double DRIVE_GEAR_RATIO = 6.75; // (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
   private final double TURN_GEAR_RATIO = 12.8; // 150.0 / 7.0;
   // -1186
   // -1533
@@ -66,8 +67,10 @@ public class ModuleIOTalonFX implements ModuleIO {
   // 22
   private final boolean isTurnMotorInverted = true;
   private final Rotation2d absoluteEncoderOffset;
+  protected int index;
 
   public ModuleIOTalonFX(int index) {
+    this.index = index;
     switch (index) {
       case 0:
         driveTalon = new TalonFX(Constants.Drive.Mod0.driveMotorID);
@@ -170,6 +173,10 @@ public class ModuleIOTalonFX implements ModuleIO {
         Units.rotationsToRadians(turnVelocity.getValueAsDouble()) / TURN_GEAR_RATIO;
     inputs.turnAppliedVolts = turnAppliedVolts.getValueAsDouble();
     inputs.turnCurrentAmps = new double[] {turnCurrent.getValueAsDouble()};
+    SmartDashboard.putNumber(
+        "turnAbsolutePosition Mod " + this.index, inputs.turnAbsolutePosition.getDegrees());
+
+    SmartDashboard.putNumber("turnPosition Mod " + this.index, inputs.turnPosition.getDegrees());
   }
 
   @Override

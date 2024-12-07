@@ -19,7 +19,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import org.littletonrobotics.junction.Logger;
 
@@ -70,22 +69,7 @@ public class Module {
     io.updateInputs(inputs);
     Logger.processInputs("Drive/Module" + Integer.toString(index), inputs);
 
-    // SmartDashboard.putNumber("Mod " + index + " CANcoder", 0.0000001);
-
-    SmartDashboard.putNumber("Mod " + index + " CANcoder", getAngle().getDegrees());
-    if (turnRelativeOffset != null) {
-      SmartDashboard.putNumber("turnRelativeOffset Mod " + index, turnRelativeOffset.getDegrees());
-    }
-    // SmartDashboard.putNumber("Mod" + index + "new turn absolute",
     // io.getDegreesOfAbsoluteTurnNew());
-    /// Before: -1.82109375
-    // After: -216.38203125
-    // Difference: 214.5609375
-    // Scale Factor: 1.67784501781
-    if (inputs.turnPosition != null) {
-      SmartDashboard.putNumber("turn Position Mod " + index, inputs.turnPosition.getDegrees());
-    }
-    // System.out.println("hi");
     // On first cycle, reset relative turn encoder
     // Wait until absolute angle is nonzero in case it wasn't initialized yet
     if (turnRelativeOffset == null && inputs.turnAbsolutePosition.getRadians() != 0.0) {
